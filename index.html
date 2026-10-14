@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculador de impresión 3D · Capa por Capa</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#1b2233;--mut:#5d6679;--ac:#3b6cf6;--acx:#fff;--bd:#d9dfec;--ok:#eaf1ff}
+@media (prefers-color-scheme:dark){:root{--bg:#10141f;--card:#1a2030;--tx:#e8ecf6;--mut:#9aa4ba;--ac:#6b93ff;--acx:#10141f;--bd:#2c3550;--ok:#212b47}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;padding:20px 14px}
+main{max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px}
+h1{font-size:1.45rem;margin:0 0 10px}
+p{margin:0 0 12px;color:var(--mut);font-size:.95rem}
+a{color:var(--ac)}
+label{display:block;font-weight:600;margin:16px 0 6px;font-size:.95rem}
+input[type=number],input[type=text],textarea{width:100%;padding:11px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:1rem;font-family:inherit}
+textarea{resize:vertical;min-height:80px}
+.opts{display:flex;gap:10px}
+.opts label{flex:1;margin:0;font-weight:500}
+.opts input{display:none}
+.opts span{display:block;text-align:center;padding:11px;border:1px solid var(--bd);border-radius:10px;cursor:pointer;background:var(--bg)}
+.opts input:checked+span{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:600}
+.res{margin-top:22px;background:var(--ok);border-radius:12px;padding:18px;text-align:center}
+.res small{color:var(--mut)}
+.price{font-size:2rem;font-weight:700;margin:4px 0}
+.btn{display:block;width:100%;margin-top:10px;padding:13px;border:1px solid var(--ac);border-radius:10px;background:transparent;color:var(--ac);font-size:1rem;font-weight:600;text-align:center;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn.main{background:var(--ac);color:var(--acx)}
+.btn.off{opacity:.45;pointer-events:none}
+.hint{font-size:.82rem;color:var(--mut);margin:6px 0 0}
+.note{margin-top:18px;font-size:.82rem;color:var(--mut)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>Bienvenidos al calculador de impresión 3D</h1>
+<p>Para ver modelos, dirígete a la página de modelos de impresiones: <a href="https://makerworld.com/en" target="_blank" rel="noopener">MakerWorld: Download Free 3D Models</a>. Busca el modelo que te interese, selecciónalo y revisa cuánto pesa y su tiempo de impresión. Luego indícalo acá:</p>
+
+<label for="g">Peso (en gramos)</label>
+<input id="g" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej: 120">
+
+<label for="h">Tiempo de impresión (en horas)</label>
+<input id="h" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej: 5.5">
+
+<label>¿Necesitas personalización?</label>
+<div class="opts">
+<label><input type="radio" name="p" value="no" checked><span>No</span></label>
+<label><input type="radio" name="p" value="si"><span>Sí</span></label>
+</div>
+
+<div id="pw" hidden>
+<label for="d">¿Qué necesitas personalizar?</label>
+<textarea id="d" placeholder="Ej: nombre, color, tamaño, logo, texto..."></textarea>
+</div>
+
+<div class="res">
+<small>Costo aproximado</small>
+<div class="price" id="total">$0</div>
+<small>CLP</small>
+</div>
+
+<div id="send" hidden>
+<label for="n">Tu nombre</label>
+<input id="n" type="text" placeholder="Nombre">
+<label for="m">Link del modelo</label>
+<input id="m" type="text" placeholder="https://makerworld.com/...">
+<p class="hint">Si no tienes el link, escribe "foto" y envíanos la imagen del modelo por el chat.</p>
+
+<a class="btn main off" id="wa" href="#" target="_blank" rel="noopener">Enviar solicitud por WhatsApp</a>
+<button class="btn off" id="cp" type="button">Copiar solicitud</button>
+<button class="btn off" id="ig" type="button" hidden>Copiar y abrir Instagram</button>
+<p class="hint" id="req">Completa todos los campos para enviar.</p>
+<p class="hint">Al enviar, recuerda adjuntar la foto del modelo si no tienes el link.</p>
+</div>
+
+<p class="note">Esta es una estimación y el valor final dependerá de varios factores (tipo de filamento, complejidad de la personalización, otros). El valor definitivo se te confirmará una vez que envíes la propuesta.</p>
+</main>
+<script>
+// Valores internos (no visibles para el cliente)
+var COSTO_KILO=20000, COSTO_HORA=500, RECARGO_PERS=0.10, GANANCIA=0.50;
+var WHATSAPP="56964257509";   // +56 9 6425 7509
+var INSTAGRAM="";             // <- escribe tu usuario de Instagram sin @ (si queda vacío, el botón no aparece)
+
+var $=function(i){return document.getElementById(i)};
+var total=0, ok=false;
+function pers(){return document.querySelector('input[name=p]:checked').value==="si"}
+function fmt(n){return "$"+n.toLocaleString("es-CL")}
+function texto(){
+  return "Hola! Quiero solicitar una impresión 3D.\n\n"+
+   "Nombre: "+$("n").value.trim()+"\n"+
+   "Modelo: "+$("m").value.trim()+"\n"+
+   "Peso: "+$("g").value+" g\n"+
+   "Tiempo de impresión: "+$("h").value+" h\n"+
+   "Personalización: "+(pers()?"Sí":"No")+"\n"+
+   (pers()?"Qué personalizar: "+$("d").value.trim()+"\n":"")+
+   "Costo aproximado: "+fmt(total)+" CLP";
+}
+function calc(){
+  var g=parseFloat($("g").value)||0, h=parseFloat($("h").value)||0;
+  var base=(g/1000)*COSTO_KILO + h*COSTO_HORA;
+  if(pers()) base*=1+RECARGO_PERS;
+  total=Math.round(base*(1+GANANCIA));
+  $("total").textContent=fmt(total);
+  $("send").hidden=!(g>0&&h>0);
+  $("pw").hidden=!pers();
+  ok=!!(g>0&&h>0&&$("n").value.trim()&&$("m").value.trim()&&(!pers()||$("d").value.trim()));
+  ["wa","cp","ig"].forEach(function(i){$(i).classList.toggle("off",!ok)});
+  $("req").hidden=ok;
+  $("wa").href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(texto());
+}
+function copiar(cb){
+  var t=texto();
+  function fallback(){
+    var a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";
+    document.body.appendChild(a);a.select();
+    try{document.execCommand("copy")}catch(e){}
+    document.body.removeChild(a);cb();
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(cb,fallback)}else{fallback()}
+}
+function flash(b,txt){var o=b.textContent;b.textContent=txt;setTimeout(function(){b.textContent=o},2000)}
+$("cp").addEventListener("click",function(){if(!ok)return;var b=this;copiar(function(){flash(b,"¡Copiado!")})});
+if(INSTAGRAM){
+  $("ig").hidden=false;
+  $("ig").addEventListener("click",function(){
+    if(!ok)return;var b=this;
+    copiar(function(){flash(b,"¡Copiado! Pégalo en el chat");window.open("https://ig.me/m/"+INSTAGRAM,"_blank")});
+  });
+}
+["g","h","n","m","d"].forEach(function(i){$(i).addEventListener("input",calc)});
+document.querySelectorAll('input[name=p]').forEach(function(e){e.addEventListener("change",calc)});
+calc();
+</script>
+</body>
+</html>
