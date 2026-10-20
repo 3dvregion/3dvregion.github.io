@@ -3,45 +3,190 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calculador de impresión 3D · Capa por Capa</title>
+<title>Capa por Capa · Impresión 3D en la V Región</title>
+<meta name="description" content="Impresión 3D a pedido y personalizada en la V Región. Cotiza tu pieza en línea.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Caveat+Brush&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f4f6fb;--card:#fff;--tx:#1b2233;--mut:#5d6679;--ac:#3b6cf6;--acx:#fff;--bd:#d9dfec;--ok:#eaf1ff}
-@media (prefers-color-scheme:dark){:root{--bg:#10141f;--card:#1a2030;--tx:#e8ecf6;--mut:#9aa4ba;--ac:#6b93ff;--acx:#10141f;--bd:#2c3550;--ok:#212b47}}
+:root{--kraft:#EBDDC3;--paper:#F8F1E3;--ink:#3B2F2A;--mut:#6B5A4F;--terra:#C8553D;--mus:#E0A526;--teal:#2F7F79;--bd:#D8C7A6}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;padding:20px 14px}
-main{max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:24px}
-h1{font-size:1.45rem;margin:0 0 10px}
-p{margin:0 0 12px;color:var(--mut);font-size:.95rem}
-a{color:var(--ac)}
-label{display:block;font-weight:600;margin:16px 0 6px;font-size:.95rem}
-input[type=number],input[type=text],textarea{width:100%;padding:11px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:1rem;font-family:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+a{color:var(--teal)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.brush{font-family:'Caveat Brush','Comic Sans MS',cursive;font-weight:400}
+.hand{font-family:'Caveat','Comic Sans MS',cursive;font-weight:600}
+header{position:sticky;top:0;z-index:10;background:var(--kraft);border-bottom:3px dashed var(--ink)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:8px;padding-bottom:8px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand span{font-size:1.9rem;line-height:1}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.92rem;padding:6px 10px;border-radius:8px}
+nav a:hover{background:rgba(59,47,42,.1)}
+nav a.cta{background:var(--terra);color:#fff}
+
+.hero{background:var(--kraft);text-align:center;padding:48px 0 56px}
+.hero h1{margin:6px 0 0;font-size:clamp(3rem,10vw,5.2rem);line-height:1}
+.hero h1 em{font-style:normal;color:var(--terra);font-size:.55em;margin:0 .15em}
+.hero .sub{font-size:clamp(1.6rem,5vw,2.4rem);margin:10px 0 4px}
+.hero p{max-width:560px;margin:8px auto 22px;color:var(--mut);font-size:1.05rem}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:12px;border:2px solid var(--ink);background:transparent;color:var(--ink);font-size:1rem;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn.main{background:var(--terra);border-color:var(--terra);color:#fff}
+.btn.teal{background:var(--teal);border-color:var(--teal);color:#fff}
+.btn.off{opacity:.45;pointer-events:none}
+section{padding:54px 0}
+section.alt{background:var(--kraft)}
+h2{font-size:2.5rem;margin:0 0 6px;line-height:1.1}
+.lead{color:var(--mut);margin:0 0 26px;max-width:640px}
+.wave{display:block;margin:0 0 14px}
+.steps{display:flex;flex-wrap:wrap;justify-content:center;gap:30px 22px}
+.step{flex:1 1 300px;max-width:360px;background:var(--paper);border:2px dashed var(--ink);border-radius:18px;padding:30px 18px 18px;position:relative}
+.pic{display:block;width:100%;max-width:230px;height:auto;margin:0 auto 10px}
+.pic text{font-family:'Caveat','Comic Sans MS',cursive;font-weight:600;stroke:none;fill:#3B2F2A}
+section.alt .step{background:var(--paper)}
+.step b.n{position:absolute;top:-18px;left:16px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem}
+.step h3{margin:10px 0 6px;font-size:1.05rem}
+.step p{margin:0;color:var(--mut);font-size:.95rem}
+.tips{margin-top:22px;background:var(--paper);border-left:6px solid var(--mus);border-radius:10px;padding:14px 18px;color:var(--mut);font-size:.95rem}
+.tips ul{margin:6px 0 0;padding-left:20px}
+.calc{max-width:640px;margin:0 auto;background:var(--paper);border:3px dashed var(--ink);border-radius:22px;padding:26px}
+label{display:block;font-weight:700;margin:16px 0 6px;font-size:.95rem}
+input[type=number],input[type=text],textarea{width:100%;padding:11px 12px;border:2px solid var(--bd);border-radius:10px;background:#fff;color:var(--ink);font-size:1rem;font-family:inherit}
 textarea{resize:vertical;min-height:80px}
 .opts{display:flex;gap:10px}
 .opts label{flex:1;margin:0;font-weight:500}
 .opts input{display:none}
-.opts span{display:block;text-align:center;padding:11px;border:1px solid var(--bd);border-radius:10px;cursor:pointer;background:var(--bg)}
-.opts input:checked+span{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:600}
-.res{margin-top:22px;background:var(--ok);border-radius:12px;padding:18px;text-align:center}
+.opts span{display:block;text-align:center;padding:11px;border:2px solid var(--bd);border-radius:10px;cursor:pointer;background:#fff}
+.opts input:checked+span{background:var(--teal);color:#fff;border-color:var(--teal);font-weight:700}
+.res{margin-top:22px;background:var(--kraft);border-radius:14px;padding:16px;text-align:center}
 .res small{color:var(--mut)}
-.price{font-size:2rem;font-weight:700;margin:4px 0}
-.btn{display:block;width:100%;margin-top:10px;padding:13px;border:1px solid var(--ac);border-radius:10px;background:transparent;color:var(--ac);font-size:1rem;font-weight:600;text-align:center;text-decoration:none;cursor:pointer;font-family:inherit}
-.btn.main{background:var(--ac);color:var(--acx)}
-.btn.off{opacity:.45;pointer-events:none}
-.hint{font-size:.82rem;color:var(--mut);margin:6px 0 0}
-.note{margin-top:18px;font-size:.82rem;color:var(--mut)}
+.price{font-size:2.6rem;margin:2px 0;line-height:1.1;color:var(--terra)}
+.calc .btn{display:block;width:100%;margin-top:10px;text-align:center}
+.hint{font-size:.83rem;color:var(--mut);margin:6px 0 0}
+.note{margin:18px 0 0;font-size:.83rem;color:var(--mut)}
+.cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:10px}
+.card{background:var(--paper);border:2px dashed var(--ink);border-radius:18px;padding:22px;text-align:center}
+.card h3{margin:0 0 6px;font-size:2rem}
+.card p{margin:0 0 14px;color:var(--mut)}
+footer{background:var(--ink);color:#EBDDC3;text-align:center;padding:26px 18px;font-size:.9rem}
+footer a{color:var(--mus)}
 [hidden]{display:none!important}
+.hero-grid{display:grid;gap:18px;align-items:center;justify-items:center}
+.hero-logo{order:-1}
+.hero-logo svg{width:min(230px,58vw);height:auto;display:block}
+.row3{display:grid;gap:0 14px;grid-template-columns:1fr}
+.cards{max-width:760px;margin-left:auto;margin-right:auto}
+.cards .card{margin:0}
+@media(min-width:600px){.row3{grid-template-columns:1fr 1fr 1fr}}
+@media(min-width:900px){
+.hero{padding:70px 0 76px}
+.hero-grid{grid-template-columns:1.25fr .75fr;justify-items:stretch;gap:40px}
+.hero-text{text-align:left}
+.hero p{margin-left:0}
+.btns{justify-content:flex-start}
+.hero-logo{order:0;display:flex;justify-content:center}
+.hero-logo svg{width:100%;max-width:400px}
+section{padding:72px 0}
+.lead{font-size:1.1rem}
+}
+@media(max-width:640px){
+header .wrap{flex-direction:column;gap:2px}
+nav{justify-content:center}
+nav a{font-size:.88rem;padding:5px 8px}
+.brand span{font-size:1.6rem}
+section{padding:42px 0}
+h2{font-size:2.1rem}
+.calc{padding:18px}
+.step{max-width:none}
+}
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="logo" viewBox="0 0 200 130" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<g transform="rotate(-2 100 65)">
+<path d="M76 20 q8 -7 16 0 t16 0 t16 0" stroke="#C8553D" stroke-width="10"/>
+<path d="M68 42 q8 -7 16 0 t16 0 t16 0 t16 0" stroke="#E0A526" stroke-width="10"/>
+<path d="M60 64 q8 -7 16 0 t16 0 t16 0 t16 0 t16 0" stroke="#2F7F79" stroke-width="10"/>
+<path d="M52 86 q8 -7 16 0 t16 0 t16 0 t16 0 t16 0 t16 0" stroke="#3B2F2A" stroke-width="10"/>
+<path d="M44 108 q8 -7 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0" stroke="#3B2F2A" stroke-width="10"/>
+</g>
+</symbol>
+<symbol id="wave" viewBox="0 0 260 14" fill="none" stroke="#E0A526" stroke-width="5" stroke-linecap="round"><path d="M6 8 q16 -9 32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t32 0 t24 0"/></symbol>
+</svg>
+
+<header>
+<div class="wrap">
+<a class="brand" href="#inicio" aria-label="Capa por Capa, inicio">
+<svg width="62" height="40" role="img" aria-label="Logo Capa por Capa"><use href="#logo"/></svg>
+<span class="brush">Capa por Capa</span>
+</a>
+<nav>
+<a class="hide" href="#como">Cómo cotizar</a>
+<a class="hide" href="#cotizador">Cotizador</a>
+<a href="#contacto" class="cta">Contacto</a>
+</nav>
+</div>
+</header>
+
 <main>
-<h1>Bienvenidos al calculador de impresión 3D</h1>
-<p>Para ver modelos, dirígete a la página de modelos de impresiones: <a href="https://makerworld.com/en" target="_blank" rel="noopener">MakerWorld: Download Free 3D Models</a>. Busca el modelo que te interese, selecciónalo y revisa cuánto pesa y su tiempo de impresión. Luego indícalo acá:</p>
+<div class="hero" id="inicio">
+<div class="wrap hero-grid">
+<div class="hero-text">
+<h1 class="brush">Capa <em class="hand">por</em> Capa</h1>
+<svg width="240" height="13" aria-hidden="true" style="margin-top:8px"><use href="#wave"/></svg>
+<div class="sub hand">Impresión 3D · V Región</div>
+<p>Piezas hechas a pedido y personalizadas, creadas capa por capa. Elige un modelo, cotiza al tiro y escríbenos para coordinar.</p>
+<div class="btns">
+<a class="btn main" href="#cotizador">Cotizar ahora</a>
+<a class="btn" href="https://instagram.com/3dvregion" target="_blank" rel="noopener">Instagram @3dvregion</a>
+</div>
+</div>
+<div class="hero-logo"><svg viewBox="0 0 200 130" role="img" aria-label="Logo Capa por Capa"><use href="#logo"/></svg></div>
+</div>
+</div>
 
-<label for="g">Peso (en gramos)</label>
-<input id="g" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej: 120">
+<section id="como">
+<div class="wrap">
+<h2 class="brush">¿Cómo cotizar tu pieza?</h2>
+<svg class="wave" width="200" height="11" aria-hidden="true"><use href="#wave"/></svg>
+<p class="lead">Puedes elegir cualquier modelo de MakerWorld, una página con miles de diseños 3D. En cinco pasos sabrás cuánto cuesta aproximadamente.</p>
+<div class="steps">
+<div class="step"><b class="n brush" style="background:var(--terra)">1</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un navegador abierto en makerworld.com"><rect x="8" y="8" width="204" height="114" rx="12" fill="#fff"/><path d="M8 34H212"/><circle cx="22" cy="21" r="3" fill="#C8553D" stroke="none"/><circle cx="33" cy="21" r="3" fill="#E0A526" stroke="none"/><circle cx="44" cy="21" r="3" fill="#2F7F79" stroke="none"/><rect x="58" y="13" width="142" height="16" rx="8" fill="#EBDDC3" stroke-width="2"/><text x="68" y="26" font-size="15">makerworld.com</text><rect x="22" y="48" width="52" height="60" rx="8" fill="#F4C7B8"/><rect x="84" y="48" width="52" height="60" rx="8" fill="#F6E0A6"/><rect x="146" y="48" width="52" height="60" rx="8" fill="#BFE0DC"/></svg><h3>Entra a MakerWorld</h3><p>Abre <a href="https://makerworld.com/en" target="_blank" rel="noopener">makerworld.com</a> en tu celular o computador.</p></div>
+<div class="step"><b class="n brush" style="background:var(--mus)">2</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de una barra de búsqueda con la palabra llavero"><rect x="14" y="12" width="192" height="32" rx="16" fill="#fff"/><circle cx="36" cy="28" r="7"/><path d="M41 33L47 39"/><text x="60" y="35" font-size="20">llavero</text><rect x="14" y="58" width="90" height="62" rx="10" fill="#F6E0A6"/><rect x="116" y="58" width="90" height="62" rx="10" fill="#BFE0DC"/><circle cx="59" cy="82" r="11"/><rect x="53" y="95" width="12" height="14" rx="3" fill="#C8553D"/><path d="M140 108V74l16 14 16-14v34" /></svg><h3>Busca lo que necesitas</h3><p>Usa el buscador de arriba con palabras simples, por ejemplo "llavero", "soporte celular" o "maceta". También puedes explorar por categorías.</p></div>
+<div class="step"><b class="n brush" style="background:var(--teal)">3</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un modelo 3D con cinco estrellas"><rect x="30" y="8" width="160" height="114" rx="12" fill="#fff"/><polygon points="95,30 135,50 95,70 55,50" fill="#F6E0A6"/><polygon points="55,50 95,70 95,108 55,88" fill="#E0A526"/><polygon points="135,50 95,70 95,108 135,88" fill="#C8553D"/><text x="143" y="34" font-size="18" style="fill:#E0A526">★★★★</text></svg><h3>Elige un modelo</h3><p>Abre el que te guste y mira las fotos y los comentarios de quienes ya lo imprimieron para confirmar que te sirve.</p></div>
+<div class="step"><b class="n brush" style="background:var(--ink)">4</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un reloj con el tiempo y una pesa con los gramos"><rect x="12" y="8" width="196" height="114" rx="12" fill="#fff"/><circle cx="48" cy="38" r="20" fill="#BFE0DC"/><path d="M48 38V25M48 38L58 44"/><text x="82" y="46" font-size="24">2 h 30 min</text><path d="M30 118V80h36l6 38z" transform="translate(0 -14)" fill="#F6E0A6"/><text x="40" y="100" font-size="20">g</text><text x="82" y="100" font-size="24">45 g</text></svg><h3>Revisa peso y tiempo</h3><p>En la página del modelo busca la sección de perfiles de impresión (Print Profile). Ahí aparece el tiempo estimado de impresión y los gramos de filamento. Si hay varios perfiles, elige el que más se parezca a lo que quieres.</p></div>
+<div class="step"><b class="n brush" style="background:var(--terra)">5</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un link que se copia y se envía por chat"><rect x="10" y="10" width="200" height="28" rx="14" fill="#F6E0A6"/><text x="24" y="30" font-size="17">https://makerworld.com/…</text><path d="M110 42V66M101 57L110 68L119 57"/><rect x="36" y="76" width="148" height="40" rx="14" fill="#BFE0DC"/><path d="M62 116L56 126L82 116"/><text x="52" y="102" font-size="19">¡Te lo envío!</text></svg><h3>Copia el link y cotiza</h3><p>Copia la dirección de la barra del navegador (o usa el botón de compartir de la app), anota el peso y las horas en el cotizador y envíanos la solicitud por WhatsApp o Instagram.</p></div>
+</div>
+<div class="tips"><b>Consejos</b>
+<ul>
+<li>Si no encuentras el peso o el tiempo, igual envíanos el link y lo revisamos nosotros.</li>
+<li>Si no tienes el link, mándanos una foto del modelo por el chat.</li>
+<li>Si el modelo tiene varias piezas o colores, cuéntanoslo en tu mensaje.</li>
+</ul></div>
+</div>
+</section>
 
-<label for="h">Tiempo de impresión (en horas)</label>
-<input id="h" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej: 5.5">
+<section id="cotizador" class="alt">
+<div class="wrap">
+<div style="text-align:center">
+<h2 class="brush">Calculador de impresión 3D</h2>
+<svg class="wave" width="200" height="11" aria-hidden="true" style="margin:0 auto 14px"><use href="#wave"/></svg>
+<p class="lead" style="margin-left:auto;margin-right:auto">Indica el peso, el tiempo de impresión y si necesitas personalización para ver un costo aproximado.</p>
+</div>
+<div class="calc">
+<div class="row3">
+<div><label for="g">Peso (gramos)</label>
+<input id="g" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej: 120"></div>
+<div><label for="h">Tiempo (horas)</label>
+<input id="h" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej: 5.5"></div>
+<div><label for="q">Cantidad</label>
+<input id="q" type="number" min="1" step="1" value="1" inputmode="numeric"></div>
+</div>
+<p class="hint">Ingresa el peso y el tiempo de una sola unidad.</p>
 
 <label>¿Necesitas personalización?</label>
 <div class="opts">
@@ -56,8 +201,9 @@ textarea{resize:vertical;min-height:80px}
 
 <div class="res">
 <small>Costo aproximado</small>
-<div class="price" id="total">$0</div>
+<div class="price brush" id="total">$0</div>
 <small>CLP</small>
+<div><small id="unit" hidden></small></div>
 </div>
 
 <div id="send" hidden>
@@ -68,22 +214,43 @@ textarea{resize:vertical;min-height:80px}
 <p class="hint">Si no tienes el link, escribe "foto" y envíanos la imagen del modelo por el chat.</p>
 
 <a class="btn main off" id="wa" href="#" target="_blank" rel="noopener">Enviar solicitud por WhatsApp</a>
+<button class="btn off" id="ig" type="button">Copiar y abrir Instagram</button>
 <button class="btn off" id="cp" type="button">Copiar solicitud</button>
-<button class="btn off" id="ig" type="button" hidden>Copiar y abrir Instagram</button>
 <p class="hint" id="req">Completa todos los campos para enviar.</p>
-<p class="hint">Al enviar, recuerda adjuntar la foto del modelo si no tienes el link.</p>
 </div>
 
-<p class="note">Esta es una estimación y el valor final dependerá de varios factores (tipo de filamento, complejidad de la personalización, otros). El valor definitivo se te confirmará una vez que envíes la propuesta.</p>
+<p class="note">Esta es una estimación y el valor final dependerá de varios factores (tipo de filamento, complejidad de la personalización, otros). Además, existen descuentos por volumen en pedidos de varias unidades. El valor definitivo se te confirmará una vez que envíes la propuesta.</p>
+</div>
+</div>
+</section>
+
+<section id="contacto">
+<div class="wrap" style="text-align:center">
+<h2 class="brush">Contacto</h2>
+<svg class="wave" width="200" height="11" aria-hidden="true" style="margin:0 auto 14px"><use href="#wave"/></svg>
+<p class="lead" style="margin-left:auto;margin-right:auto">¿Tienes una idea, una consulta o un proyecto especial? Escríbenos.</p>
+<div class="cards">
+<div class="card"><h3 class="brush">WhatsApp</h3><p>+56 9 6425 7509</p><a class="btn teal" id="wac" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a></div>
+<div class="card"><h3 class="brush">Instagram</h3><p>@3dvregion</p><a class="btn main" href="https://instagram.com/3dvregion" target="_blank" rel="noopener">Ir a Instagram</a></div>
+</div>
+<p class="note">Atendemos en la V Región.</p>
+</div>
+</section>
 </main>
+
+<footer>
+<div>Capa por Capa · Impresión 3D · V Región</div>
+<div style="margin-top:4px"><a href="https://instagram.com/3dvregion" target="_blank" rel="noopener">@3dvregion</a></div>
+</footer>
+
 <script>
 // Valores internos (no visibles para el cliente)
 var COSTO_KILO=20000, COSTO_HORA=500, RECARGO_PERS=0.10, GANANCIA=0.50;
-var WHATSAPP="56964257509";   // +56 9 6425 7509
-var INSTAGRAM="";             // <- escribe tu usuario de Instagram sin @ (si queda vacío, el botón no aparece)
+var WHATSAPP="56964257509";
+var INSTAGRAM="3dvregion";
 
 var $=function(i){return document.getElementById(i)};
-var total=0, ok=false;
+var total=0, unit=0, qty=1, ok=false;
 function pers(){return document.querySelector('input[name=p]:checked').value==="si"}
 function fmt(n){return "$"+n.toLocaleString("es-CL")}
 function texto(){
@@ -94,14 +261,20 @@ function texto(){
    "Tiempo de impresión: "+$("h").value+" h\n"+
    "Personalización: "+(pers()?"Sí":"No")+"\n"+
    (pers()?"Qué personalizar: "+$("d").value.trim()+"\n":"")+
-   "Costo aproximado: "+fmt(total)+" CLP";
+   "Cantidad: "+qty+"\n"+
+   (qty>1?"Valor por unidad: "+fmt(unit)+" CLP\n":"")+
+   "Costo aproximado"+(qty>1?" total":"")+": "+fmt(total)+" CLP";
 }
 function calc(){
   var g=parseFloat($("g").value)||0, h=parseFloat($("h").value)||0;
   var base=(g/1000)*COSTO_KILO + h*COSTO_HORA;
   if(pers()) base*=1+RECARGO_PERS;
-  total=Math.round(base*(1+GANANCIA));
+  qty=Math.max(1,parseInt($("q").value,10)||1);
+  unit=Math.round(base*(1+GANANCIA));
+  total=unit*qty;
   $("total").textContent=fmt(total);
+  $("unit").hidden=qty<2||!(g>0&&h>0);
+  $("unit").textContent=qty+" unidades × "+fmt(unit)+" c/u";
   $("send").hidden=!(g>0&&h>0);
   $("pw").hidden=!pers();
   ok=!!(g>0&&h>0&&$("n").value.trim()&&$("m").value.trim()&&(!pers()||$("d").value.trim()));
@@ -119,16 +292,14 @@ function copiar(cb){
   }
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(cb,fallback)}else{fallback()}
 }
-function flash(b,txt){var o=b.textContent;b.textContent=txt;setTimeout(function(){b.textContent=o},2000)}
+function flash(b,txt){var o=b.textContent;b.textContent=txt;setTimeout(function(){b.textContent=o},2500)}
 $("cp").addEventListener("click",function(){if(!ok)return;var b=this;copiar(function(){flash(b,"¡Copiado!")})});
-if(INSTAGRAM){
-  $("ig").hidden=false;
-  $("ig").addEventListener("click",function(){
-    if(!ok)return;var b=this;
-    copiar(function(){flash(b,"¡Copiado! Pégalo en el chat");window.open("https://ig.me/m/"+INSTAGRAM,"_blank")});
-  });
-}
-["g","h","n","m","d"].forEach(function(i){$(i).addEventListener("input",calc)});
+$("ig").addEventListener("click",function(){
+  if(!ok)return;var b=this;
+  copiar(function(){flash(b,"¡Copiado! Pégalo en el chat");window.open("https://ig.me/m/"+INSTAGRAM,"_blank")});
+});
+$("wac").href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Hola! Quiero consultar por una impresión 3D.");
+["g","h","q","n","m","d"].forEach(function(i){$(i).addEventListener("input",calc)});
 document.querySelectorAll('input[name=p]').forEach(function(e){e.addEventListener("change",calc)});
 calc();
 </script>
