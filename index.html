@@ -72,7 +72,38 @@ textarea{resize:vertical;min-height:80px}
 .card p{margin:0 0 14px;color:var(--mut)}
 footer{background:var(--ink);color:#EBDDC3;text-align:center;padding:26px 18px;font-size:.9rem}
 footer a{color:var(--mus)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips label{margin:0;font-weight:500}
+.chips input{display:none}
+.chips span{display:block;padding:10px 16px;border:2px solid var(--bd);border-radius:10px;cursor:pointer;background:#fff}
+.chips input:checked+span{background:var(--teal);color:#fff;border-color:var(--teal);font-weight:700}
 [hidden]{display:none!important}
+.como-grid{display:grid;gap:34px;grid-template-columns:1fr}
+.como-video h3,.como-steps>h3{font-size:2rem;margin:0 0 6px;font-weight:400}
+.como-video p{color:var(--mut);margin:0 0 14px}
+.como-video video{width:100%;height:auto;border:3px dashed var(--ink);border-radius:18px;background:#000;display:block}
+.gal{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.gal figure{margin:0;cursor:pointer;background:var(--paper);border:2px dashed var(--ink);border-radius:16px;padding:8px;overflow:hidden}
+.gal img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;display:block}
+.gal figcaption{padding:8px 4px 2px;font-size:.92rem;font-weight:600;text-align:center}
+.colores{display:grid;gap:26px;align-items:center;grid-template-columns:1fr}
+.colores img{width:100%;height:auto;border:3px dashed var(--ink);border-radius:18px;display:block}
+.sw{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0;padding:0;list-style:none}
+.sw li{display:flex;align-items:center;gap:8px;background:var(--paper);border:2px solid var(--bd);border-radius:999px;padding:5px 14px 5px 8px;font-weight:600;font-size:.92rem}
+.sw i{width:20px;height:20px;border-radius:50%;border:2px solid var(--ink);display:inline-block}
+#lb{position:fixed;inset:0;background:rgba(30,22,18,.9);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;z-index:50;cursor:zoom-out}
+#lb img{max-width:100%;max-height:80vh;border-radius:12px}
+#lb p{color:#EBDDC3;margin:0;font-weight:600}
+@media(min-width:1000px){
+.como-grid{grid-template-columns:1fr 1fr;align-items:start;gap:44px}
+.como-video{position:sticky;top:90px}
+.como-steps .steps{flex-direction:column;flex-wrap:nowrap;gap:34px}
+.como-steps .step{flex:none;max-width:none;display:grid;grid-template-columns:150px 1fr;column-gap:18px;align-items:center;padding:26px 18px 16px}
+.como-steps .step .pic{grid-row:1/3;margin:0;max-width:150px}
+.como-steps .step h3{margin:0;align-self:end}
+.como-steps .step p{align-self:start}
+.colores{grid-template-columns:1.1fr .9fr;gap:40px}
+}
 .hero-grid{display:grid;gap:18px;align-items:center;justify-items:center}
 .hero-logo{order:-1}
 .hero-logo svg{width:min(230px,58vw);height:auto;display:block}
@@ -127,6 +158,7 @@ h2{font-size:2.1rem}
 <nav>
 <a class="hide" href="#como">Cómo cotizar</a>
 <a class="hide" href="#cotizador">Cotizador</a>
+<a class="hide" href="#trabajos">Trabajos</a>
 <a href="#contacto" class="cta">Contacto</a>
 </nav>
 </div>
@@ -153,9 +185,20 @@ h2{font-size:2.1rem}
 <div class="wrap">
 <h2 class="brush">¿Cómo cotizar tu pieza?</h2>
 <svg class="wave" width="200" height="11" aria-hidden="true"><use href="#wave"/></svg>
-<p class="lead">Puedes elegir cualquier modelo de MakerWorld, una página con miles de diseños 3D. En cinco pasos sabrás cuánto cuesta aproximadamente.</p>
+<p class="lead">Puedes elegir cualquier modelo de MakerWorld, una página con miles de diseños 3D. En cinco pasos sabrás cuánto cuesta aproximadamente. Puedes verlo en video o leer los pasos, como prefieras.</p>
+<div class="como-grid">
+<div class="como-video">
+<h3 class="brush">Mira el video</h3>
+<p>¿Prefieres verlo en vez de leerlo? Aquí te mostramos paso a paso cómo buscar un modelo en MakerWorld, revisar sus datos y cotizar.</p>
+<video controls preload="metadata" playsinline poster="makerworld-guia.jpg">
+<source src="makerworld-guia.mp4" type="video/mp4">
+Tu navegador no puede reproducir este video.
+</video>
+</div>
+<div class="como-steps">
+<h3 class="brush">O sigue los pasos</h3>
 <div class="steps">
-<div class="step"><b class="n brush" style="background:var(--terra)">1</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un navegador abierto en makerworld.com"><rect x="8" y="8" width="204" height="114" rx="12" fill="#fff"/><path d="M8 34H212"/><circle cx="22" cy="21" r="3" fill="#C8553D" stroke="none"/><circle cx="33" cy="21" r="3" fill="#E0A526" stroke="none"/><circle cx="44" cy="21" r="3" fill="#2F7F79" stroke="none"/><rect x="58" y="13" width="142" height="16" rx="8" fill="#EBDDC3" stroke-width="2"/><text x="68" y="26" font-size="15">makerworld.com</text><rect x="22" y="48" width="52" height="60" rx="8" fill="#F4C7B8"/><rect x="84" y="48" width="52" height="60" rx="8" fill="#F6E0A6"/><rect x="146" y="48" width="52" height="60" rx="8" fill="#BFE0DC"/></svg><h3>Entra a MakerWorld</h3><p>Abre <a href="https://makerworld.com/en" target="_blank" rel="noopener">makerworld.com</a> en tu celular o computador.</p></div>
+<div class="step"><b class="n brush" style="background:var(--terra)">1</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un navegador abierto en makerworld.com"><rect x="8" y="8" width="204" height="114" rx="12" fill="#fff"/><path d="M8 34H212"/><circle cx="22" cy="21" r="3" fill="#C8553D" stroke="none"/><circle cx="33" cy="21" r="3" fill="#E0A526" stroke="none"/><circle cx="44" cy="21" r="3" fill="#2F7F79" stroke="none"/><rect x="58" y="13" width="142" height="16" rx="8" fill="#EBDDC3" stroke-width="2"/><text x="68" y="26" font-size="15">makerworld.com</text><rect x="22" y="48" width="52" height="60" rx="8" fill="#F4C7B8"/><rect x="84" y="48" width="52" height="60" rx="8" fill="#F6E0A6"/><rect x="146" y="48" width="52" height="60" rx="8" fill="#BFE0DC"/></svg><h3>Entra a MakerWorld</h3><p>Abre <a href="https://makerworld.com/es" target="_blank" rel="noopener">makerworld.com</a> en tu celular o computador.</p></div>
 <div class="step"><b class="n brush" style="background:var(--mus)">2</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de una barra de búsqueda con la palabra llavero"><rect x="14" y="12" width="192" height="32" rx="16" fill="#fff"/><circle cx="36" cy="28" r="7"/><path d="M41 33L47 39"/><text x="60" y="35" font-size="20">llavero</text><rect x="14" y="58" width="90" height="62" rx="10" fill="#F6E0A6"/><rect x="116" y="58" width="90" height="62" rx="10" fill="#BFE0DC"/><circle cx="59" cy="82" r="11"/><rect x="53" y="95" width="12" height="14" rx="3" fill="#C8553D"/><path d="M140 108V74l16 14 16-14v34" /></svg><h3>Busca lo que necesitas</h3><p>Usa el buscador de arriba con palabras simples, por ejemplo "llavero", "soporte celular" o "maceta". También puedes explorar por categorías.</p></div>
 <div class="step"><b class="n brush" style="background:var(--teal)">3</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un modelo 3D con cinco estrellas"><rect x="30" y="8" width="160" height="114" rx="12" fill="#fff"/><polygon points="95,30 135,50 95,70 55,50" fill="#F6E0A6"/><polygon points="55,50 95,70 95,108 55,88" fill="#E0A526"/><polygon points="135,50 95,70 95,108 135,88" fill="#C8553D"/><text x="143" y="34" font-size="18" style="fill:#E0A526">★★★★</text></svg><h3>Elige un modelo</h3><p>Abre el que te guste y mira las fotos y los comentarios de quienes ya lo imprimieron para confirmar que te sirve.</p></div>
 <div class="step"><b class="n brush" style="background:var(--ink)">4</b><svg class="pic" viewBox="0 0 220 130" fill="none" stroke="#3B2F2A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Dibujo de un reloj con el tiempo y una pesa con los gramos"><rect x="12" y="8" width="196" height="114" rx="12" fill="#fff"/><circle cx="48" cy="38" r="20" fill="#BFE0DC"/><path d="M48 38V25M48 38L58 44"/><text x="82" y="46" font-size="24">2 h 30 min</text><path d="M30 118V80h36l6 38z" transform="translate(0 -14)" fill="#F6E0A6"/><text x="40" y="100" font-size="20">g</text><text x="82" y="100" font-size="24">45 g</text></svg><h3>Revisa peso y tiempo</h3><p>En la página del modelo busca la sección de perfiles de impresión (Print Profile). Ahí aparece el tiempo estimado de impresión y los gramos de filamento. Si hay varios perfiles, elige el que más se parezca a lo que quieres.</p></div>
@@ -167,6 +210,9 @@ h2{font-size:2.1rem}
 <li>Si no tienes el link, mándanos una foto del modelo por el chat.</li>
 <li>Si el modelo tiene varias piezas o colores, cuéntanoslo en tu mensaje.</li>
 </ul></div>
+
+</div>
+</div>
 </div>
 </section>
 
@@ -175,9 +221,14 @@ h2{font-size:2.1rem}
 <div style="text-align:center">
 <h2 class="brush">Calculador de impresión 3D</h2>
 <svg class="wave" width="200" height="11" aria-hidden="true" style="margin:0 auto 14px"><use href="#wave"/></svg>
-<p class="lead" style="margin-left:auto;margin-right:auto">Indica el peso, el tiempo de impresión y si necesitas personalización para ver un costo aproximado.</p>
+<p class="lead" style="margin-left:auto;margin-right:auto">Cuéntanos tu idea o indica el peso, el tiempo de impresión, los accesorios y si necesitas personalización para ver un costo aproximado. También trabajamos llaveros, imanes, clickers y NFC.</p>
 </div>
 <div class="calc">
+<label for="i" style="margin-top:0">¿Tienes alguna idea? Cuéntanosla</label>
+<textarea id="i" placeholder="Ej: quiero un llavero con la forma de mi mascota, un soporte para mi escritorio..."></textarea>
+<p class="hint">Puedes enviarla desde aquí aunque no completes lo demás.</p>
+
+<p style="margin:22px 0 0;font-weight:700;color:var(--ink)">Si la viste en MakerWorld, cuéntanos los detalles de la impresión:</p>
 <div class="row3">
 <div><label for="g">Peso (gramos)</label>
 <input id="g" type="number" min="0" step="any" inputmode="decimal" placeholder="Ej: 120"></div>
@@ -187,6 +238,21 @@ h2{font-size:2.1rem}
 <input id="q" type="number" min="1" step="1" value="1" inputmode="numeric"></div>
 </div>
 <p class="hint">Ingresa el peso y el tiempo de una sola unidad.</p>
+
+<label>¿Lleva algún accesorio?</label>
+<div class="chips">
+<label><input type="checkbox" name="a" value="llavero"><span>Llavero</span></label>
+<label><input type="checkbox" name="a" value="nfc"><span>NFC</span></label>
+<label><input type="checkbox" name="a" value="clicker"><span>Clicker</span></label>
+<label><input type="checkbox" name="a" value="iman"><span>Imán (mini)</span></label>
+<label><input type="checkbox" name="a" value="otro"><span>Otro</span></label>
+</div>
+<div id="ow" hidden>
+<label for="o">¿Cuál accesorio?</label>
+<input id="o" type="text" placeholder="Escribe qué accesorio necesitas">
+<p class="hint">Se suma un valor referencial; el valor final de este accesorio se confirmará al enviar la propuesta.</p>
+</div>
+<p class="hint">Puedes elegir más de uno. Si no lleva, déjalo sin marcar.</p>
 
 <label>¿Necesitas personalización?</label>
 <div class="opts">
@@ -201,25 +267,71 @@ h2{font-size:2.1rem}
 
 <div class="res">
 <small>Costo aproximado</small>
-<div class="price brush" id="total">$0</div>
+<div class="price brush" id="total">—</div>
 <small>CLP</small>
-<div><small id="unit" hidden></small></div>
+<div><small id="unit"></small></div>
 </div>
 
-<div id="send" hidden>
+<div id="send">
 <label for="n">Tu nombre</label>
 <input id="n" type="text" placeholder="Nombre">
 <label for="m">Link del modelo</label>
 <input id="m" type="text" placeholder="https://makerworld.com/...">
 <p class="hint">Si no tienes el link, escribe "foto" y envíanos la imagen del modelo por el chat.</p>
 
-<a class="btn main off" id="wa" href="#" target="_blank" rel="noopener">Enviar solicitud por WhatsApp</a>
-<button class="btn off" id="ig" type="button">Copiar y abrir Instagram</button>
-<button class="btn off" id="cp" type="button">Copiar solicitud</button>
-<p class="hint" id="req">Completa todos los campos para enviar.</p>
+<a class="btn main" id="wa" href="#" target="_blank" rel="noopener">Enviar solicitud por WhatsApp</a>
+<button class="btn" id="ig" type="button">Copiar y abrir Instagram</button>
+<button class="btn" id="cp" type="button">Copiar solicitud</button>
+<p class="hint">Puedes enviar la solicitud aunque falten datos; lo conversamos por el chat.</p>
 </div>
 
 <p class="note">Esta es una estimación y el valor final dependerá de varios factores (tipo de filamento, complejidad de la personalización, otros). Además, existen descuentos por volumen en pedidos de varias unidades. El valor definitivo se te confirmará una vez que envíes la propuesta.</p>
+</div>
+</div>
+</section>
+
+<section id="trabajos">
+<div class="wrap">
+<div style="text-align:center">
+<h2 class="brush">Trabajos realizados</h2>
+<svg class="wave" width="200" height="11" aria-hidden="true" style="margin:0 auto 14px"><use href="#wave"/></svg>
+<p class="lead" style="margin-left:auto;margin-right:auto">Algunas de las piezas que hemos hecho. Toca una foto para verla más grande.</p>
+</div>
+<div class="gal">
+<figure data-cap="Medallas de tenis de mesa"><img src="trabajo-medallas-pingpong.jpg" alt="Dos medallas de tenis de mesa impresas en 3D, en dorado y negro" loading="lazy"><figcaption>Medallas de tenis de mesa</figcaption></figure>
+<figure data-cap="Medallas con nombre"><img src="trabajo-medallas-nombre.jpg" alt="Medallas amarillas con nombre personalizado y cinta" loading="lazy"><figcaption>Medallas con nombre</figcaption></figure>
+<figure data-cap="Porta tablet y soporte de celular"><img src="trabajo-porta-tablet.jpg" alt="Soporte en forma de montañas para tablet y soporte de celular con forma de gato" loading="lazy"><figcaption>Porta tablet y soporte de celular</figcaption></figure>
+<figure data-cap="Indicador para lavavajillas"><img src="trabajo-lavavajillas.jpg" alt="Indicador deslizable CLEAN impreso en 3D, puesto en un lavavajillas" loading="lazy"><figcaption>Indicador para lavavajillas</figcaption></figure>
+<figure data-cap="Clips decorativos para regalo"><img src="trabajo-regalos.jpg" alt="Clips decorativos rojos y verdes dentro de un sobre" loading="lazy"><figcaption>Clips decorativos para regalo</figcaption></figure>
+<figure data-cap="Adorno navideño personalizable"><img src="trabajo-navidad.jpg" alt="Adorno de Navidad rojo con lazo y estrellas, con espacio para personalizar" loading="lazy"><figcaption>Adorno navideño personalizable</figcaption></figure>
+<figure data-cap="Figura en miniatura"><img src="trabajo-figura.jpg" alt="Pequeña cabeza de figura impresa en 3D, en color blanco" loading="lazy"><figcaption>Figura en miniatura</figcaption></figure>
+<figure data-cap="Maceta con plato"><img src="trabajo-maceta.jpg" alt="Maceta cuadrada con textura y plato, impresa en 3D" loading="lazy"><figcaption>Maceta con plato</figcaption></figure>
+<figure data-cap="Letras para collares"><img src="trabajo-letras-collares.jpg" alt="Letras del abecedario impresas en azul y blanco para collares" loading="lazy"><figcaption>Letras para collares</figcaption></figure>
+<figure data-cap="Bases para punto cruz"><img src="trabajo-punto-cruz.jpg" alt="Base blanca perforada con borde de estampilla para bordar punto cruz" loading="lazy"><figcaption>Bases para punto cruz</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section id="colores" class="alt">
+<div class="wrap">
+<div class="colores">
+<div>
+<h2 class="brush">Variedad de colores</h2>
+<svg class="wave" width="200" height="11" aria-hidden="true"><use href="#wave"/></svg>
+<p class="lead" style="margin-bottom:0">Trabajamos con una gran variedad de colores de filamento, y también podemos combinar varios colores en una misma pieza. Cuéntanos cuál te gusta y te confirmamos la disponibilidad.</p>
+<ul class="sw" aria-label="Algunos de los colores disponibles">
+<li><i style="background:#F5F2EA"></i>Blanco</li>
+<li><i style="background:#2A2522"></i>Negro</li>
+<li><i style="background:#D63A3A"></i>Rojo</li>
+<li><i style="background:#EF8A1F"></i>Naranjo</li>
+<li><i style="background:#F2C81D"></i>Amarillo</li>
+<li><i style="background:#3FAE4E"></i>Verde</li>
+<li><i style="background:#2E6FD0"></i>Azul</li>
+<li><i style="background:#7A4BB5"></i>Morado</li>
+<li>y muchos más</li>
+</ul>
+</div>
+<img src="colores-filamento.jpg" alt="Estante con rollos de filamento de muchos colores junto a una impresora 3D" loading="lazy">
 </div>
 </div>
 </section>
@@ -234,52 +346,87 @@ h2{font-size:2.1rem}
 <div class="card"><h3 class="brush">Instagram</h3><p>@3dvregion</p><a class="btn main" href="https://instagram.com/3dvregion" target="_blank" rel="noopener">Ir a Instagram</a></div>
 </div>
 <p class="note">Atendemos en la V Región.</p>
+<p style="margin:18px auto 0;max-width:560px;font-weight:700">Tenemos opciones de envío a domicilio, por pagar, vía Blue Express.</p>
 </div>
 </section>
 </main>
 
 <footer>
 <div>Capa por Capa · Impresión 3D · V Región</div>
+<div style="margin-top:4px">Envíos a domicilio por pagar vía Blue Express</div>
 <div style="margin-top:4px"><a href="https://instagram.com/3dvregion" target="_blank" rel="noopener">@3dvregion</a></div>
 </footer>
 
+<div id="lb" hidden><img alt=""><p></p></div>
+<script>
+// Visor de fotos
+(function(){
+  var lb=document.getElementById("lb"),im=lb.querySelector("img"),cp=lb.querySelector("p");
+  document.querySelectorAll(".gal figure").forEach(function(f){
+    f.addEventListener("click",function(){var i=f.querySelector("img");im.src=i.src;im.alt=i.alt;cp.textContent=f.dataset.cap;lb.hidden=false});
+  });
+  lb.addEventListener("click",function(){lb.hidden=true});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")lb.hidden=true});
+})();
+</script>
 <script>
 // Valores internos (no visibles para el cliente)
-var COSTO_KILO=20000, COSTO_HORA=500, RECARGO_PERS=0.10, GANANCIA=0.50;
+var COSTO_KILO=20000, COSTO_HORA=500, RECARGO_PERS=0.20, GANANCIA=0.50;
+// Costo por pieza de cada accesorio (pack de 50 / 50)
+var ACCESORIOS={
+  llavero:{n:"Llavero",c:4000/50},
+  nfc:{n:"NFC",c:3000/50},
+  clicker:{n:"Clicker",c:5000/50},
+  iman:{n:"Imán (mini)",c:2000/50}
+};
 var WHATSAPP="56964257509";
 var INSTAGRAM="3dvregion";
 
 var $=function(i){return document.getElementById(i)};
-var total=0, unit=0, qty=1, ok=false;
+var total=0, unit=0, qty=1, hasData=false;
+// "Otro" suma el valor del accesorio más caro
+function costoAcc(k){
+  if(k==="otro") return Math.max.apply(null,Object.keys(ACCESORIOS).map(function(x){return ACCESORIOS[x].c}));
+  return ACCESORIOS[k].c;
+}
 function pers(){return document.querySelector('input[name=p]:checked').value==="si"}
+function accs(){return Array.prototype.map.call(document.querySelectorAll('input[name=a]:checked'),function(e){return e.value})}
 function fmt(n){return "$"+n.toLocaleString("es-CL")}
 function texto(){
-  return "Hola! Quiero solicitar una impresión 3D.\n\n"+
-   "Nombre: "+$("n").value.trim()+"\n"+
-   "Modelo: "+$("m").value.trim()+"\n"+
-   "Peso: "+$("g").value+" g\n"+
-   "Tiempo de impresión: "+$("h").value+" h\n"+
-   "Personalización: "+(pers()?"Sí":"No")+"\n"+
-   (pers()?"Qué personalizar: "+$("d").value.trim()+"\n":"")+
-   "Cantidad: "+qty+"\n"+
-   (qty>1?"Valor por unidad: "+fmt(unit)+" CLP\n":"")+
-   "Costo aproximado"+(qty>1?" total":"")+": "+fmt(total)+" CLP";
+  var L=["Hola! Quiero solicitar una impresión 3D.",""];
+  function add(k,v){if(v)L.push(k+": "+v)}
+  var g=$("g").value, h=$("h").value, d=$("d").value.trim();
+  add("Mi idea",$("i").value.trim());
+  add("Nombre",$("n").value.trim());
+  add("Modelo",$("m").value.trim());
+  add("Peso (por unidad)",g?g+" g":"");
+  add("Tiempo de impresión (por unidad)",h?h+" h":"");
+  add("Accesorios",accs().map(function(k){
+    if(k==="otro"){var o=$("o").value.trim();return "Otro"+(o?": "+o:" (sin especificar)")}
+    return ACCESORIOS[k].n}).join(", "));
+  add("Personalización",pers()?(d?"Sí - "+d:"Sí (sin detalle aún)"):"No");
+  add("Cantidad",qty);
+  if(hasData){
+    if(qty>1) add("Valor por unidad",fmt(unit)+" CLP");
+    add("Costo aproximado"+(qty>1?" total":""),fmt(total)+" CLP");
+  } else {
+    L.push("Costo aproximado: por definir");
+  }
+  return L.join("\n");
 }
 function calc(){
   var g=parseFloat($("g").value)||0, h=parseFloat($("h").value)||0;
-  var base=(g/1000)*COSTO_KILO + h*COSTO_HORA;
+  hasData=g>0&&h>0;
+  var extra=accs().reduce(function(t,k){return t+costoAcc(k)},0);
+  var base=(g/1000)*COSTO_KILO + h*COSTO_HORA + extra;
   if(pers()) base*=1+RECARGO_PERS;
   qty=Math.max(1,parseInt($("q").value,10)||1);
   unit=Math.round(base*(1+GANANCIA));
   total=unit*qty;
-  $("total").textContent=fmt(total);
-  $("unit").hidden=qty<2||!(g>0&&h>0);
-  $("unit").textContent=qty+" unidades × "+fmt(unit)+" c/u";
-  $("send").hidden=!(g>0&&h>0);
+  $("total").textContent=hasData?fmt(total):"—";
+  $("unit").textContent=hasData?(qty>1?qty+" unidades × "+fmt(unit)+" c/u":""):"Ingresa peso y tiempo para ver el costo aproximado";
   $("pw").hidden=!pers();
-  ok=!!(g>0&&h>0&&$("n").value.trim()&&$("m").value.trim()&&(!pers()||$("d").value.trim()));
-  ["wa","cp","ig"].forEach(function(i){$(i).classList.toggle("off",!ok)});
-  $("req").hidden=ok;
+  $("ow").hidden=accs().indexOf("otro")<0;
   $("wa").href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(texto());
 }
 function copiar(cb){
@@ -293,14 +440,14 @@ function copiar(cb){
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(cb,fallback)}else{fallback()}
 }
 function flash(b,txt){var o=b.textContent;b.textContent=txt;setTimeout(function(){b.textContent=o},2500)}
-$("cp").addEventListener("click",function(){if(!ok)return;var b=this;copiar(function(){flash(b,"¡Copiado!")})});
+$("cp").addEventListener("click",function(){var b=this;copiar(function(){flash(b,"¡Copiado!")})});
 $("ig").addEventListener("click",function(){
-  if(!ok)return;var b=this;
+  var b=this;
   copiar(function(){flash(b,"¡Copiado! Pégalo en el chat");window.open("https://ig.me/m/"+INSTAGRAM,"_blank")});
 });
 $("wac").href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Hola! Quiero consultar por una impresión 3D.");
-["g","h","q","n","m","d"].forEach(function(i){$(i).addEventListener("input",calc)});
-document.querySelectorAll('input[name=p]').forEach(function(e){e.addEventListener("change",calc)});
+["i","g","h","q","n","m","d","o"].forEach(function(i){$(i).addEventListener("input",calc)});
+document.querySelectorAll('input[name=p],input[name=a]').forEach(function(e){e.addEventListener("change",calc)});
 calc();
 </script>
 </body>
